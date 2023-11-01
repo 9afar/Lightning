@@ -18,6 +18,16 @@
         "default": "./dist/lightning.js"
       }
     },
+    "./custom": {
+      "import": {
+        "types": "./dist/custom.d.ts",
+        "default": "./dist/custom.esm.js"
+      },
+      "require": {
+        "types": "./dist/custom.d.ts",
+        "default": "./dist/custom.js"
+      }
+    },
     "./package.json": "./package.json"
   },
   "files": [
@@ -30,11 +40,11 @@
     "typedoc": "typedoc --tsconfig tsconfig.typedoc.json",
     "tsd": "tsd",
     "copy-extra-tsd-files": "bash ./scripts/copy-extra-tsd-files.sh",
-    "build:lightning-inspect.es5": "BUILD_INSPECTOR=true BUILD_ES5=true vite build --mode production",
+    "build:lightning-inspect.es5": "set BUILD_INSPECTOR=true&&set BUILD_ES5=true&&vite build --mode production",
     "build:lightning": "vite build --mode production",
-    "build:lightning.min": "BUILD_MINIFY=true vite build --mode production",
-    "build:lightning.es5": "BUILD_ES5=true vite build --mode production",
-    "build:lightning.es5.min": "BUILD_ES5=true BUILD_MINIFY=true vite build --mode production",
+    "build:lightning.min": "set BUILD_MINIFY=true&&vite build --mode production",
+    "build:lightning.es5": "set BUILD_ES5=true&&vite build --mode production",
+    "build:lightning.es5.min": "set BUILD_ES5=true&&set BUILD_MINIFY=true&&vite build --mode production",
     "test": "vitest"
   },
   "repository": {

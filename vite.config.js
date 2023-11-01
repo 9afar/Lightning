@@ -15,14 +15,16 @@ const isMinifiedBuild = process.env.BUILD_MINIFY === 'true';
 const isInspectorBuild = process.env.BUILD_INSPECTOR === 'true';
 
 let outDir = 'dist';
-let entry = resolve(__dirname, 'src/lightning.mjs');
+let entry = {
+  lightning: resolve(__dirname, 'src/lightning.mjs'), custom: resolve(__dirname, 'src/custom.mjs')
+};
 let outputBase = 'lightning';
 let sourcemap = true;
 let useDts = true;
 
 if (isInspectorBuild) {
   outDir = 'devtools';
-  entry = resolve(__dirname, 'devtools/lightning-inspect.js');
+  entry['lightning-inspect'] = resolve(__dirname, 'devtools/lightning-inspect.js');
   outputBase = 'lightning-inspect';
   sourcemap = false;
   useDts = false;
@@ -51,6 +53,7 @@ export default defineConfig(() => {
             },
           ],
         ],
+        babelHelpers: 'bundled'
       }),
       /* Add comment banner to top of bundle */
       banner([
@@ -76,10 +79,10 @@ export default defineConfig(() => {
         /**
          * @type {import('vite').LibraryFormats[]}
          */
-        formats: ['umd', .../** @type {[] | ['es']} */ (isEs5Build ? [] : ['es'])],
+        formats: [.../** @type {[] | ['es']} */ (isEs5Build ? [] : ['es'])],
         name: 'lng',
         // the proper extensions will be added
-        fileName: (format) => {
+        fileName: (format, entryName) => {
           let extension = isMinifiedBuild ? '.min.js' : '.js';
           if (isEs5Build) {
             extension = '.es5' + extension;
@@ -87,7 +90,7 @@ export default defineConfig(() => {
           if (format === 'es') {
             extension = '.esm' + extension;
           }
-          return outputBase + extension;
+          return entryName + extension;
         }
       },
     },

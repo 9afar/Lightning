@@ -54,5 +54,13 @@ const lightning = {
 if (Utils.isWeb) {
     window.lng = lightning;
 }
-
+export {
+    Application,
+    Utils,
+    StageUtils,
+    Tools,
+    Stage,
+    Texture,
+    EventEmitter,
+}
 export default lightning;

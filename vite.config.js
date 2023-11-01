@@ -79,7 +79,7 @@ export default defineConfig(() => {
         /**
          * @type {import('vite').LibraryFormats[]}
          */
-        formats: [.../** @type {[] | ['es']} */ (isEs5Build ? [] : ['es'])],
+        formats: ['cjs', .../** @type {[] | ['es']} */ (isEs5Build ? [] : ['es'])],
         name: 'lng',
         // the proper extensions will be added
         fileName: (format, entryName) => {

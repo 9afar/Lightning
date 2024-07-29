@@ -1748,7 +1748,9 @@ export default class Element {
     enableTextTexture() {
         if (!this.texture || !(this.texture instanceof TextTexture)) {
             this.texture = new TextTexture(this.stage);
-
+            // Cannot find a better workaround.
+            // I want to retrieve the *ignoreRTL* from this.__core, but the child element always create ahead of parent.
+            this.texture.ignoreRTL = this.ignoreRTL;
             if (!this.texture.w && !this.texture.h) {
                 // Inherit dimensions from element.
                 // This allows userland to set dimensions of the Element and then later specify the text.

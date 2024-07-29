@@ -84,7 +84,7 @@ export default class TextTexture extends Texture {
     get fontBaselineRatio() {
         return this._fontBaselineRatio;
     }
-    
+
     set fontBaselineRatio(v) {
         if (this._fontBaselineRatio !== v) {
             this._fontBaselineRatio = v;
@@ -492,6 +492,15 @@ export default class TextTexture extends Texture {
         }
     }
 
+    get ignoreRTL() {
+        return this._ignoreRTL;
+    }
+
+    set ignoreRTL(v) {
+        this._ignoreRTL = v;
+        this._changed();
+    }
+
     _getIsValid() {
         return !!this.text;
     }
@@ -689,6 +698,7 @@ export default class TextTexture extends Texture {
         obj.cutSy = this._cutSy;
         obj.cutEy = this._cutEy;
         obj.advancedRenderer = this._advancedRenderer;
+        obj.ignoreRTL = this._ignoreRTL;
         return obj;
     }
 
@@ -738,6 +748,7 @@ proto._cutSy = 0;
 proto._cutEy = 0;
 proto._advancedRenderer = false;
 proto._fontBaselineRatio = 0;
+proto._ignore = false;
 
 
 import TextTextureRenderer from "./TextTextureRenderer.mjs";

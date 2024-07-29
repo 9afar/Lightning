@@ -272,7 +272,7 @@ export default class TextTextureRenderer {
 
         // Canvas context has been reset.
         this.setFontProperties();
-        if (window.isRTL) {
+        if (window.isRTL && !this._settings.ignoreRTL) {
             this._context.direction = 'rtl';
             this._context.textAlign = 'left';
         }
